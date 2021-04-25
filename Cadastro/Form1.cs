@@ -53,7 +53,7 @@ namespace Cadastro {
         }
         private void importPeople() {
             people.Clear();
-            openFileDialog1.Filter = "Text files|*.txt";
+            openFileDialog1.Filter = "Text files|*.txt|csv files|*.csv";
             if (openFileDialog1.ShowDialog() == DialogResult.OK) {
                 var cadastro = openFileDialog1.OpenFile();
                 using (StreamReader sr = new StreamReader(cadastro)) {
@@ -68,12 +68,13 @@ namespace Cadastro {
             }
         }
         private void exportPeople() {
-            saveFileDialog1.Filter = "Text files|*.txt";
+            saveFileDialog1.Filter = "Text files|*.txt|csv files|*.csv";
             if (saveFileDialog1.ShowDialog() == DialogResult.OK) {
                 File.WriteAllText(saveFileDialog1.FileName, String.Empty);
                 using (StreamWriter sw = File.AppendText(saveFileDialog1.FileName)) {
+                    sw.WriteLine("Nome,Salario");
                     foreach (Person p in people) {
-                        sw.WriteLine(p.Name + ", " + p.Salary.ToString("F2", CultureInfo.InvariantCulture));
+                        sw.WriteLine(p.Name + "," + p.Salary.ToString("F2", CultureInfo.InvariantCulture));
                     }
                 }
             }

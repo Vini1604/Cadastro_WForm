@@ -62,21 +62,21 @@ namespace Cadastro {
             // importarToolStripMenuItem
             // 
             this.importarToolStripMenuItem.Name = "importarToolStripMenuItem";
-            this.importarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.importarToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.importarToolStripMenuItem.Text = "Importar";
             this.importarToolStripMenuItem.Click += new System.EventHandler(this.importarToolStripMenuItem_Click);
             // 
             // exportarToolStripMenuItem
             // 
             this.exportarToolStripMenuItem.Name = "exportarToolStripMenuItem";
-            this.exportarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exportarToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.exportarToolStripMenuItem.Text = "Exportar";
             this.exportarToolStripMenuItem.Click += new System.EventHandler(this.exportarToolStripMenuItem_Click);
             // 
             // sairToolStripMenuItem
             // 
             this.sairToolStripMenuItem.Name = "sairToolStripMenuItem";
-            this.sairToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sairToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.sairToolStripMenuItem.Text = "Sair";
             this.sairToolStripMenuItem.Click += new System.EventHandler(this.sairToolStripMenuItem_Click);
             // 

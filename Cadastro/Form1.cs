@@ -29,39 +29,52 @@ namespace Cadastro {
                 name = txtNome.Text;
                 salary = double.Parse(txtSalary.Text, CultureInfo.InvariantCulture);
                 people.Add(new Person(name, salary));
+                MessageBox.Show("Usuário cadastrado!!", "Cadastro OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else {
                 if (txtNome.Text.Length == 0) {
-                    MessageBox.Show("Digite um nome!!");
+                    MessageBox.Show("Digite um nome!!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 if (txtSalary.Text.Length == 0) {
-                    MessageBox.Show("Digite um salário");
+                    MessageBox.Show("Digite um Salário", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
+            txtNome.Text = "";
+            txtSalary.Text = "";
         }
 
         private void importarToolStripMenuItem_Click(object sender, EventArgs e) {
-            people.Clear();
-            openFileDialog1.Filter = "Text files|*.txt";
-            openFileDialog1.ShowDialog();
-            var cadastro = openFileDialog1.OpenFile();
-            using (StreamReader sr = new StreamReader(cadastro)) {
-                string[] lines = File.ReadAllLines(openFileDialog1.FileName);
-                foreach (string line in lines) {
-                    string[] fields = line.Split(',');
-                    name = fields[0];
-                    salary = double.Parse(fields[1], CultureInfo.InvariantCulture);
-                    people.Add(new Person(name, salary));
-                }
-            }
+            importPeople();
+
         }
 
         private void exportarToolStripMenuItem_Click(object sender, EventArgs e) {
+            exportPeople();
+        }
+        private void importPeople() {
+            people.Clear();
+            openFileDialog1.Filter = "Text files|*.txt";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK) {
+                var cadastro = openFileDialog1.OpenFile();
+                using (StreamReader sr = new StreamReader(cadastro)) {
+                    string[] lines = File.ReadAllLines(openFileDialog1.FileName);
+                    foreach (string line in lines) {
+                        string[] fields = line.Split(',');
+                        name = fields[0];
+                        salary = double.Parse(fields[1], CultureInfo.InvariantCulture);
+                        people.Add(new Person(name, salary));
+                    }
+                }
+            }
+        }
+        private void exportPeople() {
             saveFileDialog1.Filter = "Text files|*.txt";
-            saveFileDialog1.ShowDialog();
-            using (StreamWriter sw = File.AppendText(saveFileDialog1.FileName)) {
-                foreach (Person p in people) {
-                    sw.WriteLine(p.Name + "," + p.Salary.ToString("F2", CultureInfo.InvariantCulture));
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK) {
+                File.WriteAllText(saveFileDialog1.FileName, String.Empty);
+                using (StreamWriter sw = File.AppendText(saveFileDialog1.FileName)) {
+                    foreach (Person p in people) {
+                        sw.WriteLine(p.Name + ", " + p.Salary.ToString("F2", CultureInfo.InvariantCulture));
+                    }
                 }
             }
         }
